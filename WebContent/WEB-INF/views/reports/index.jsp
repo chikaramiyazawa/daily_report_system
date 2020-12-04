@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <c:import url="/WEB-INF/views/layout/app.jsp">
     <c:param name="content">
         <c:if test="${flush != null}">
@@ -20,7 +20,7 @@
                     <th class="report_action">操作</th>
                </tr>
                <c:forEach var="report" items="${reports}" varStatus="status">
-                <tr class ="row${status.count % 2}">
+                <tr class="row${status.count % 2}">
                     <td class="report_name"><c:out value="${report.employee.name}"/></td>
                     <td class="report_date"><fmt:formatDate value='${report.report_date}' pattern='yyyy-MM-dd' /></td>
                     <td class="report_title">${report.title}</td>
@@ -31,7 +31,7 @@
                </table>
 
                <div id="pagination">
-                (全 ${reports_count} 件)<br />
+                (全 ${reports_count} 件) <br />
                 <c:forEach var="i" begin="1" end="${((reports_count -1) /15) + 1}" step="1">
                     <c:choose>
                         <c:when test="${i == page}">
@@ -44,7 +44,7 @@
                 </c:forEach>
                 </div>
                 <p><a href="<c:url value='/reports/new' />">新規日報の登録</a></p>
-                </c:param>
 
+                </c:param>
             </c:import>
 
