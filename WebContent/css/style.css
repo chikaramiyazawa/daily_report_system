@@ -155,3 +155,32 @@ pre{
 h3{
     font-size: larger;
 }
+
+table#follow_list th{
+    font-weight: bold;
+    padding: 10px 2%;
+}
+
+table#follow_list .follow_name{
+    width: 20%;
+    padding: 10px 2%;
+}
+
+table#follow_list .follow_date{
+    width: 20%;
+}
+table#follow_list .follow_title{
+    width: 37%;
+}
+table#follow_list .follow_action{
+    width: 13%;
+}
+table#client_list th{
+    width: 30%;
+    padding: 10px 2%;
+}
+
+table#client_list td{
+    width: 29%;
+    padding: 10px 2%;
+}

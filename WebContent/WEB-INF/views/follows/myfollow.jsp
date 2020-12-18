@@ -10,29 +10,31 @@
             </div>
         </c:if>
         <h2>日報管理システムへようこそ</h2>
-        <h3>【自分の日報　一覧】</h3>
-        <table id="report_list">
+        <h3>【自分がフォローした日報　一覧】</h3>
+        <table id="follow_list">
             <tbody>
                 <tr>
-                    <th class="report_name">氏名</th>
-                    <th class="report_date">日付</th>
-                    <th class="report_title">タイトル</th>
-                    <th class="report_action">操作</th>
+                    <th class="follow_followerdname">投稿主</th>
+                    <th class="follow_name">フォロワー</th>
+                    <th class="follow_date">日付</th>
+                    <th class="follow_title">タイトル</th>
+                    <th class="follow_action">操作</th>
                 </tr>
-                    <c:forEach var="report" items="${reports}" varStatus="status">
+                    <c:forEach var="follow" items="${follows}" varStatus="status">
                         <tr class="row${status.count %2}">
-                            <td class="report_name"><c:out value="${report.employee.name}" /></td>
-                            <td class="report_date"><fmt:formatDate value='${report.report_date}' pattern='yyyy-MM-dd' /></td>
-                            <td class="report_title">${report.title}</td>
-                            <td class="report_action"><a href="<c:url value='/reports/show?id=${report.id}' />">詳細を見る</a></td>
+                            <td class="follow_followerdname"><c:out value="${follow.followerdname}"/></td>
+                            <td class="follow_name"><c:out value="${follow.employee.name}" /></td>
+                            <td class="follow_date"><fmt:formatDate value='${follow.report_date}' pattern='yyyy-MM-dd' /></td>
+                            <td class="follow_title">${follow.title}</td>
+                            <td class="follow_action"><a href="<c:url value='/follow/show?id=${follow.id}' />">詳細を見る</a></td>
                     </tr>
                     </c:forEach>
                     </tbody>
                     </table>
 
                     <div id="pagination">
-                        (全 ${reports_count}　件)<br />
-                       <c:forEach var="i" begin="1" end="${((reports_count - 1) / 15) + 1}" step="1">
+                        (全 ${follows_count}　件)<br />
+                       <c:forEach var="i" begin="1" end="${((follows_count - 1) / 15) + 1}" step="1">
                         <c:choose>
                             <c:when test="${i == page}">
                                 <c:out value="${i}" />&nbsp;
@@ -44,8 +46,8 @@
                                 </c:forEach>
                                      </div>
 
-                    <p><a href="<c:url value="/followers/index" />">フォローした日報一覧へ</a></p>
+                    <p><a href="<c:url value="/followers/index" />">フォローした日報一覧に戻る</a></p>
 
-                    <p><a href="<c:url value='/reports/new' />">新規日報の登録</a></p>
+
                 </c:param>
             </c:import>

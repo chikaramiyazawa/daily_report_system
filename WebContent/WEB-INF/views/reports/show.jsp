@@ -43,6 +43,46 @@
                              <c:if test="${sessionScope.login_employee.id == report.employee.id}">
                                 <p><a href="<c:url value="/reports/edit?id=${report.id}" />">この日報を編集する</a></p>
                              </c:if>
+
+                             <c:if test="${sessionScope.login_employee.id != report.employee.id}">
+
+
+                              <h2>${report.employee.name}の日報をフォローする</h2>
+
+                              <form method="POST" action= "<c:url value='/follow/create'/>">
+
+
+                             <label for="report_date">日付</label><br />
+                             <input type="date" name="report_date" value="<fmt:formatDate value='${report.report_date}' pattern='yyyy-MM-dd' />"/>
+                             <br /><br />
+
+                             <label for="followerdname">"${report.employee.name}"</label><br />
+                             <input type="hidden" name="followerdname" value ="${report.employee.name}" />
+                             <br /><br />
+
+                             <label for="name">フォロワー "${sessionScope.login_employee.name}"</label><br />
+                             <input type="hidden" name="name" value="${sessionScope.login_employee.name}" />
+                             <br /><br />
+
+                             <label for="title">タイトル "${report.title}"</label>
+                             <input type="hidden" name="title" value="${report.title}" />
+                             <br /><br />
+
+                             <label for="content">内容  "${report.content}"</label><br />
+                             <input type="hidden" name ="content" value = "${report.content}"/>
+                             <br /><br />
+
+                             <label for="review">評価</label><br />
+                             <textarea name="review" rows="10" cols="50">${follow.review}</textarea>
+                             <br /><br />
+
+                              <input type="hidden" name="_token" value="${_token}"/>
+                              <button type="submit">フォロー</button>
+
+                            </form>
+                             </c:if>
+
+
                              </c:when>
                              <c:otherwise>
                                 <h2>お探しのデータは見つかりませんでした。</h2>

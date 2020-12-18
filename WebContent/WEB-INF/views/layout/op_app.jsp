@@ -5,7 +5,7 @@
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
-<title>日報管理システム</title>
+<title>商談管理システム</title>
         <link rel="stylesheet" href="<c:url value='/css/reset.css' />">
         <link rel="stylesheet" href="<c:url value='/css/style.css' />">
 </head>
@@ -13,22 +13,23 @@
     <div id="wrapper">
         <div id="header">
             <div id="header_menu">
-                <h1><a href="<c:url value='/' />">日報管理システム</a></h1>&nbsp;&nbsp;&nbsp;
+                <h1><a>商談管理システム</a></h1>&nbsp;&nbsp;&nbsp;
                 <c:if test="${sessionScope.login_employee != null}">
-                        <c:if test="${sessionScope.login_employee.admin_flag == 1}">
-                            <a href="<c:url value='/employees/index' />">従業員管理</a>&nbsp;
+                         <c:if test="${sessionScope.login_employee.admin_flag == 2 && sessionScope.authorization_client.companycode == null}">
+                            <a href="<c:url value='/client/index' />">取引先管理</a>&nbsp;
                         </c:if>
-                         <c:if test="${sessionScope.login_employee.admin_flag == 2}">
-                            <a href="<c:url value='/employees/index' />">従業員管理</a>&nbsp;
+                         <c:if test="${sessionScope.login_employee.admin_flag == 3 && sessionScope.authorization_client.companycode == null}">
+                            <a href="<c:url value='/client/index' />">取引先管理</a>&nbsp;
                         </c:if>
-                         <c:if test="${sessionScope.login_employee.admin_flag == 3}">
-                            <a href="<c:url value='/employees/index' />">従業員管理</a>&nbsp;
+                        <c:if test="${sessionScope.authorization_client.companycode == null}">
+                        <a href="<c:url value='/authorization' />">商談管理</a>&nbsp;
                         </c:if>
-                        <c:if test="${sessionScope.login_employee.opportunitymanagement == 1}">
-                            <a href="<c:url value='/client/list' />">商談管理システムへ</a>&nbsp;
+                        <c:if test="${sessionScope.authorization_client.companycode != null}">
+                        <a href="<c:url value='/release' />">認証解除</a>&nbsp;
                         </c:if>
-                        <a href="<c:url value='/reports/index' />">日報管理</a>&nbsp;
-                        <a href="<c:url value="/followers/index" />">フォロー日報</a>
+                        <c:if test="${sessionScope.authorization_client.companycode == null}">
+                        <a href="<c:url value='/'  />">日報管理システムへ</a>&nbsp;
+                        </c:if>
                     </c:if>
 
             </div>

@@ -1,4 +1,4 @@
-package controllers.login;
+package controllers.authorization;
 
 import java.io.IOException;
 
@@ -11,23 +11,21 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import models.Employee;
+import models.Client;
 import utils.DBUtil;
 import utils.EncryptUtil;
 
-
-
 /**
- * Servlet implementation class LoginServlet
+ * Servlet implementation class AuthorizationServlet
  */
-@WebServlet("/login")
-public class LoginServlet extends HttpServlet {
+@WebServlet("/authorization")
+public class AuthorizationServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public LoginServlet() {
+    public AuthorizationServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -43,10 +41,9 @@ public class LoginServlet extends HttpServlet {
             request.setAttribute("flush", request.getSession().getAttribute("flush"));
             request.getSession().removeAttribute("flush");
         }
-        RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/login/login.jsp");
+        RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/authorization/authorization.jsp");
         rd.forward(request, response);
     }
-
     /**
      * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
      */
@@ -54,49 +51,44 @@ public class LoginServlet extends HttpServlet {
         // TODO Auto-generated method stub
         Boolean check_result = false;
 
-        String code = request.getParameter("code");
+        String companycode = request.getParameter("companycode");
+        String companyname = request.getParameter("companyname");
         String plain_pass = request.getParameter("password");
 
-        Employee e = null;
+        Client c = null;
 
-
-        if(code != null && !code.equals("") && plain_pass != null && !plain_pass.equals("")){
+        if(companycode != null && !companycode.equals("") && companyname != null && !companyname.equals("") && plain_pass != null && !plain_pass.equals("")){
             EntityManager em = DBUtil.createEntityManager();
 
-            String password = EncryptUtil.getPasswordEncrypt(
-                    plain_pass,
-                    (String)this.getServletContext().getAttribute("pepper")
-                    );
+            String password = EncryptUtil.getPasswordEncrypt(plain_pass,
+                                        (String)this.getServletContext().getAttribute("pepper"));
             try{
-                e = em.createNamedQuery("checkLoginCodeAndPassword",Employee.class)
-                        .setParameter("code", code)
-                        .setParameter("pass", password)
-
-                        .getSingleResult();
+                c = em.createNamedQuery("checkAuthentizationCodeAndPassword" , Client.class)
+                                    .setParameter("companycode", companycode)
+                                    .setParameter("password", password)
+                                    .getSingleResult();
             }catch(NoResultException ex){}
 
             em.close();
 
-            if(e != null){
+            if(c != null){
                 check_result = true;
             }
-
         }
         if(!check_result){
             request.setAttribute("_token", request.getSession().getId());
             request.setAttribute("hasError", true);
-            request.setAttribute("code", code);
+            request.setAttribute("companycode", companycode);
+            request.setAttribute("companyname", companyname);
 
-            RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/login/login.jsp");
+            RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/authorization/authorization.jsp");
             rd.forward(request, response);
         }else{
-            request.getSession().setAttribute("login_employee", e);
-
-            request.getSession().setAttribute("flush","ログインしました。");
-            response.sendRedirect(request.getContextPath() + "/");
+            request.getSession().setAttribute("authorization_client", c);
+            request.getSession().setAttribute("authorization_companycode" , c);
+            request.getSession().setAttribute("flush", "認証完了しました。");
+            response.sendRedirect(request.getContextPath() + "/opportunity/index");
         }
-
-
     }
 
 }

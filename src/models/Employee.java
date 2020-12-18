@@ -58,6 +58,10 @@ public class Employee {
     @Column(name = "delete_flag" , nullable = false)
     private Integer delete_flag;
 
+    @Column(name = "opportunitymanagement" , nullable = false)
+    private Integer opportunitymanagement;
+
+
     public Integer getId(){
         return id;
     }
@@ -117,6 +121,14 @@ public class Employee {
     }
     public void setDelete_flag(Integer delete_flag){
         this.delete_flag = delete_flag;
+    }
+
+    public Integer getopportunitymanagement(){
+        return opportunitymanagement;
+    }
+
+    public void setopportunitymanagement(Integer opportunitymanagement){
+        this.opportunitymanagement = opportunitymanagement;
     }
 
 }
