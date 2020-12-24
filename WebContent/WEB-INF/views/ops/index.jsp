@@ -16,6 +16,8 @@
                 <tr>
                     <th class="opportnuity_companycode">会社Code</th>
                     <th class="opportunity_client">会社名</th>
+                    <th class="opportunity_person">担当者</th>
+                    <th class="opportunity_changer">更新者</th>
                     <th class="opportunity_date">日付</th>
                     <th class="opportunity">商談</th>
                     <th class="opportunity_action">操作</th>
@@ -24,6 +26,8 @@
                         <tr class="row${status.count %2}">
                             <td class="opportunity.companycode}"><c:out value="${sessionScope.authorization_client.companycode}" /></td>
                             <td class="opportunity_client"><c:out value="${sessionScope.authorization_client.companyname}" /></td>
+                            <td class="opportunity_person"><c:out value="${opportunity.person}" /></td>
+                            <td class="opportunity_changer"><c:out value="${opportunity.changer}" /></td>
                             <td class="opportunity_date"><fmt:formatDate value='${opportunity.opportunity_date}' pattern='yyyy-MM-dd' /></td>
                             <td class="opportunity">${opportunity.opportunity}</td>
                             <td class="report_action"><a href="<c:url value='/opportunity/show?id=${opportunity.id}' />">詳細を見る</a></td>

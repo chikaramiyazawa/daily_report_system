@@ -18,6 +18,11 @@ public class OpportunityValidator {
         if(!status_error.equals("")){
             errors.add(status_error);
         }
+
+        String location_error = _validateLocation(o.getLocation());
+        if(!location_error.equals("")){
+            errors.add(location_error);
+        }
         return errors;
     }
 
@@ -35,6 +40,14 @@ public class OpportunityValidator {
 
         return "";
     }
+    private static String _validateLocation(String location){
+        if(location == null || location.equals("")){
+            return "現場は必ず書き記しましょう。";
+        }
+
+        return "";
+    }
+
 
 }
 

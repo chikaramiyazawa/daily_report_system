@@ -12,6 +12,8 @@
 
      </div>
 </c:if>
+
+
      <label for="opportunity_date">日付</label><br />
      <input type="opportunity_date" name="opportunity_date" value="<fmt:formatDate value='${opportunity.opportunity_date}' pattern='yyyy-MM-dd' />"/>
      <br /><br />
@@ -26,21 +28,22 @@
      <br /><br />
 
      <label for="person">担当者</label><br />
-      <c:out value="${sessionScope.login_employee.name}" />
-      <input type="text" name="person" value="${sessionScope.login_employee.name}" />
+     <c:out value="${opportunity.person}" />
+     <input type="hidden" name = "person" value="${opportunity.person}" />
      <br /><br />
 
-
-
-     <input type="hidden" name = "changer" value="初投稿" />
+     <label for="changer">更新者</label><br />
+     <c:out value="${sessionScope.login_employee.name}" />
+     <input type="hidden" name = "changer" value="${sessionScope.login_employee.name}" />
      <br /><br />
 
      <label for="location">場所</label>
-     <input type="text" name="location" value="${opportunity.location}" />
+     <input type= "text" name = "location" value="${opportunity.location}" />
      <br /><br />
 
      <label for="opportunity">商談</label>
-     <input type="text" name="opportunity" value="${opportunity.opportunity}" />
+     <c:out value="${opportunity.opportunity}" />
+     <input type="hidden" name="opportunity" value="${opportunity.opportunity}" />
      <br /><br />
 
      <label for="status">商談状況</label><br />
@@ -49,4 +52,5 @@
 
      <input type="hidden" name="_token" value="${_token}"/>
      <button type="submit">投稿</button>
+
 

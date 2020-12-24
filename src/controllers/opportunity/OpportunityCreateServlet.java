@@ -52,9 +52,11 @@ public class OpportunityCreateServlet extends HttpServlet {
                 opportunity_date = Date.valueOf(request.getParameter("opportunity_date"));
             }
             o.setOpportunity_date(opportunity_date);
-
+            o.setChanger(request.getParameter("changer"));
             o.setOpportunity(request.getParameter("opportunity"));
             o.setStatus(request.getParameter("status"));
+            o.setPerson(request.getParameter("person"));
+            o.setLocation(request.getParameter("location"));
 
             Timestamp currentTime = new Timestamp(System.currentTimeMillis());
             o.setCreated_at(currentTime);

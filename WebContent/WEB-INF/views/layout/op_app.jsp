@@ -34,19 +34,20 @@
 
             </div>
 
-            <c:if test="${sessionScope.login_employee != null}">
+                <c:if test="${sessionScope.login_employee != null}">
                 <div id="employee_name">
                 <c:out value="${sessionScope.login_employee.name}"/>&nbsp;さん&nbsp;&nbsp;&nbsp;
-                        <a href="<c:url value='/logout' />">ログアウト</a>
-                    </div>
+                </div>
                 </c:if>
-            </div>
+
+                 </div>
             <div id="content">
                 ${param.content}
             </div>
             <div id="footer">
                 by Taro Kirameki.
             </div>
+
         </div>
     </body>
 </html>

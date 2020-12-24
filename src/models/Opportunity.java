@@ -49,6 +49,16 @@ public class Opportunity {
     @JoinColumn(name = "companycode", nullable = false)
     private Client companycode;
 
+    @Column(name = "person" , nullable = false)
+    private String person;
+
+    @Column(name="changer",nullable = false)
+    private String changer;
+
+
+    @Column(name = "location" , nullable = false)
+    private String location;
+
     @Column(name = "opportunity_date", nullable = false)
     private Date opportunity_date;
 
@@ -127,5 +137,23 @@ public class Opportunity {
     public void setCompanycode(Client companycode) {
         this.companycode = companycode;
     }
+    public String getPerson(){
+        return person;
+    }
+    public void setPerson(String person){
+        this.person = person;
+    }
+    public String getLocation(){
+        return location;
+    }
+    public void setLocation(String location){
+        this.location = location;
+    }
+    public String getChanger() {
+        return changer;
+    }
 
+    public void setChanger(String changer) {
+        this.changer = changer;
+    }
 }

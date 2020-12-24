@@ -44,7 +44,7 @@
                                 </c:forEach>
                                      </div>
 
-                    <p><a href="<c:url value="/followers/index" />">フォローした日報一覧へ</a></p>
+                    <p><a href="<c:url value='/followers/index' />">フォローした日報一覧へ</a></p>
 
                     <p><a href="<c:url value='/reports/new' />">新規日報の登録</a></p>
                 </c:param>

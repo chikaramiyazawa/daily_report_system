@@ -5,9 +5,9 @@
 <c:param name="content">
     <c:choose>
         <c:when test="${opportunity != null}">
-            <h2>商談状況　更新ページ「</h2>
+            <h2>商談状況　更新ページ</h2>
             <form method="POST" action="<c:url value='/opportunity/update' />">
-                <c:import url="_form.jsp" />
+                <c:import url="edit_form.jsp" />
             </form>
             </c:when>
             <c:otherwise>

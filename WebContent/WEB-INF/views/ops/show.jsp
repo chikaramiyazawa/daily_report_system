@@ -22,6 +22,24 @@
                             <td><fmt:formatDate value="${opportunity.opportunity_date}" pattern="yyyy-MM-dd" /></td>
                         </tr>
                         <tr>
+                            <th>担当者</th>
+                            <td>
+                                <pre><c:out value="${opportunity.person}" /></pre>
+                            </td>
+                       </tr>
+                       <tr>
+                            <th>更新者</th>
+                            <td>
+                                <pre><c:out value="${opportunity.changer}" /></pre>
+                            </td>
+                       </tr>
+                       <tr>
+                            <th>場所</th>
+                            <td>
+                                <pre><c:out value="${opportunity.location}"/></pre>
+                            </td>
+                       </tr>
+                        <tr>
                             <th>商談</th>
                             <td>
                                 <pre><c:out value="${opportunity.opportunity}" /></pre>
