@@ -25,8 +25,12 @@
      <c:out value="${sessionScope.authorization_client.companyname}" />
      <br /><br />
 
+     <label for="search_id">商談Id</label><br />
+     <input type="hidden" name="search_id" value="${sessionScope.use.search_id}" />
+     <c:out value="${sessionScope.use.search_id}" />
+     <br /><br />
+
      <label for="person">担当者</label><br />
-      <c:out value="${sessionScope.login_employee.name}" />
       <input type="text" name="person" value="${sessionScope.login_employee.name}" />
      <br /><br />
 
@@ -49,4 +53,6 @@
 
      <input type="hidden" name="_token" value="${_token}"/>
      <button type="submit">投稿</button>
+
+
 

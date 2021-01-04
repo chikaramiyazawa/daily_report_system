@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import models.Client;
 import models.Opportunity;
+import models.Searcher;
 import models.validators.OpportunityValidator;
 import utils.DBUtil;
 
@@ -43,8 +44,11 @@ public class OpportunityCreateServlet extends HttpServlet {
             EntityManager em = DBUtil.createEntityManager();
             Opportunity o = new Opportunity();
 
+
             o.setCompanycode((Client)request.getSession().getAttribute("authorization_companycode"));
             o.setClient((Client)request.getSession().getAttribute("authorization_client"));
+
+            o.setSearch_id((Searcher)request.getSession().getAttribute("use"));
 
             Date opportunity_date = new Date(System.currentTimeMillis());
             String rd_str = request.getParameter("opportunity_date");
@@ -52,17 +56,23 @@ public class OpportunityCreateServlet extends HttpServlet {
                 opportunity_date = Date.valueOf(request.getParameter("opportunity_date"));
             }
             o.setOpportunity_date(opportunity_date);
+            o.setFaceid(request.getParameter("search_id"));
+
+
+            o.setPerson(request.getParameter("person"));
+
             o.setChanger(request.getParameter("changer"));
             o.setOpportunity(request.getParameter("opportunity"));
             o.setStatus(request.getParameter("status"));
-            o.setPerson(request.getParameter("person"));
+
             o.setLocation(request.getParameter("location"));
 
             Timestamp currentTime = new Timestamp(System.currentTimeMillis());
             o.setCreated_at(currentTime);
             o.setUpdated_at(currentTime);
 
-            List<String>errors = OpportunityValidator.validate(o);
+
+            List<String>errors = OpportunityValidator.validate(o,true);
             if(errors.size () > 0){
                 em.close();
 
@@ -75,6 +85,7 @@ public class OpportunityCreateServlet extends HttpServlet {
             }else{
                 em.getTransaction().begin();
                 em.persist(o);
+
                 em.getTransaction().commit();
                 em.close();
                 request.getSession().setAttribute("flush", "登録が完了しました。");

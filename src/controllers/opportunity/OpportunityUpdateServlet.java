@@ -15,7 +15,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import models.Client;
 import models.Opportunity;
-import models.validators.OpportunityValidator;
+import models.Searcher;
+import models.validators.OpportunityUpdateValidator;
 import utils.DBUtil;
 
 /**
@@ -46,23 +47,28 @@ public class OpportunityUpdateServlet extends HttpServlet {
             o.setCompanycode((Client)request.getSession().getAttribute("authorization_companycode"));
             o.setClient((Client)request.getSession().getAttribute("authorization_client"));
 
+            o.setSearch_id((Searcher)request.getSession().getAttribute("use"));
+
             Date opportunity_date = new Date(System.currentTimeMillis());
             String rd_str = request.getParameter("opportunity_date");
             if(rd_str != null && !rd_str.equals("")){
                 opportunity_date = Date.valueOf(request.getParameter("opportunity_date"));
             }
             o.setOpportunity_date(opportunity_date);
+
+            o.setFaceid(request.getParameter("search_id"));
+
+            o.setPerson(request.getParameter("person"));
             o.setChanger(request.getParameter("changer"));
             o.setOpportunity(request.getParameter("opportunity"));
             o.setStatus(request.getParameter("status"));
-            o.setPerson(request.getParameter("person"));
             o.setLocation(request.getParameter("location"));
 
             Timestamp currentTime = new Timestamp(System.currentTimeMillis());
             o.setCreated_at(currentTime);
             o.setUpdated_at(currentTime);
 
-            List<String>errors = OpportunityValidator.validate(o);
+            List<String>errors = OpportunityUpdateValidator.validate(o);
             if(errors.size () > 0){
                 em.close();
 

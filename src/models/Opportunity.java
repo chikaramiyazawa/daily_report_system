@@ -29,10 +29,26 @@ import javax.persistence.Table;
             name = "getMyClientOpportunity",
             query = "SELECT o FROM Opportunity AS o WHERE o.client = :client ORDER BY o.id DESC"
             ),
+
+
     @NamedQuery(
             name = "getMyClientOpportunityCount",
-            query = "SELECT COUNT(o) FROM Opportunity AS o WHERE o.client = :client"
+            query = "SELECT COUNT(o) FROM Opportunity AS o WHERE o.client = :client "
             ),
+    @NamedQuery(
+            name = "getMySearch_idOpportunity",
+            query = "SELECT o FROM Opportunity AS o WHERE o.search_id = :search_id ORDER BY o.id DESC"
+            ),
+    @NamedQuery(
+            name = "getMySearch_idOpportunityCount",
+            query = "SELECT COUNT(o) FROM Opportunity AS o WHERE o.search_id = :search_id"
+            ),
+    @NamedQuery(
+            name = "checkRegisteredfaceid",
+            query ="SELECT COUNT(o)FROM Opportunity AS o WHERE o.faceid = :faceid"
+            ),
+
+
 })
 @Entity
 public class Opportunity {
@@ -49,12 +65,18 @@ public class Opportunity {
     @JoinColumn(name = "companycode", nullable = false)
     private Client companycode;
 
+    @ManyToOne
+    @JoinColumn(name = "search_id", nullable = false )
+    private Searcher search_id;
+
+    @Column(name = "faceid" , nullable = false)
+    private String faceid;
+
     @Column(name = "person" , nullable = false)
     private String person;
 
     @Column(name="changer",nullable = false)
     private String changer;
-
 
     @Column(name = "location" , nullable = false)
     private String location;
@@ -156,4 +178,21 @@ public class Opportunity {
     public void setChanger(String changer) {
         this.changer = changer;
     }
+
+    public Searcher getSearch_id() {
+        return search_id;
+    }
+
+    public void setSearch_id(Searcher search_id) {
+        this.search_id = search_id;
+    }
+    public String getFaceid() {
+        return faceid;
+    }
+
+    public void setFaceid(String faceid) {
+        this.faceid = faceid;
+    }
+
+
 }

@@ -7,10 +7,10 @@
         <h2>商談　新規作成</h2>
 
         <form method="POST" action="<c:url value='/opportunity/create'/>">
+
             <c:import url="_form.jsp" />
         </form>
 
-        <p><a href="<c:url value='/opportunity/index' />">商談一覧に戻る</a></p>
-
+         <p><a href="<c:url value='/search/usereset?id=${sessionScope.use.id}' />">作成を中断する</a></p>
         </c:param>
 </c:import>

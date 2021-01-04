@@ -22,6 +22,10 @@
                             <td><fmt:formatDate value="${opportunity.opportunity_date}" pattern="yyyy-MM-dd" /></td>
                         </tr>
                         <tr>
+                            <th>商談Id</th>
+                            <td><c:out value="${opportunity.faceid}" /></td>
+                        </tr>
+                        <tr>
                             <th>担当者</th>
                             <td>
                                 <pre><c:out value="${opportunity.person}" /></pre>
@@ -67,8 +71,9 @@
                              </tbody>
                              </table>
 
-
+                                <c:if test= "${sessionScope.use.search_id == opportunity.faceid}">
                                 <p><a href="<c:url value="/opportunity/edit?id=${opportunity.id}" />">この商談を更新する</a></p>
+                                </c:if>
 
                                 </c:when>
                              <c:otherwise>

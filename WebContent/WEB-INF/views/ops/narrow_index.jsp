@@ -9,11 +9,9 @@
                 <c:out value="${flush}"></c:out>
             </div>
         </c:if>
-        <h2>"${sessionScope.authorization_client.companyname}"商談一覧</h2>
+       <h2>商談Id"${sessionScope.use.search_id}"　照合中</h2>
 
         <p><a href="<c:url value='/search/narrow' />">商談Idを検索する</a></p>
-
-        <p><a href="<c:url value='/search/idupdate'/>">商談を更新する</a></p>
 
         <table id="opportunity_list">
             <tbody>
@@ -52,6 +50,6 @@
                                 </c:forEach>
                                      </div>
 
-                    <p><a href="<c:url value='/search/use' />">商談を追加する</a></p>
+                <p><a href="<c:url value='/remove/searchid' />">商談Idの照合を解除する</a></p>
                 </c:param>
             </c:import>

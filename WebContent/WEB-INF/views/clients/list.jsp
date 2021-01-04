@@ -25,6 +25,8 @@
             </tbody>
         </table>
 
+        <p><a href="<c:url value='/search/list'/>">商談Idを見る</a></p>
+
 
     </c:param>
 </c:import>

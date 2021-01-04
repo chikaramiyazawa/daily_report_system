@@ -44,7 +44,7 @@
                 ${param.content}
             </div>
             <div id="footer">
-                by Taro Kirameki.
+                by Chikara.Miyazawa
             </div>
         </div>
     </body>

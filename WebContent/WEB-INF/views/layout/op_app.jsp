@@ -24,7 +24,7 @@
                         <c:if test="${sessionScope.authorization_client.companycode == null}">
                         <a href="<c:url value='/authorization' />">商談管理</a>&nbsp;
                         </c:if>
-                        <c:if test="${sessionScope.authorization_client.companycode != null}">
+                        <c:if test="${sessionScope.authorization_client.companycode != null  && sessionScope.use.search_id == null}">
                         <a href="<c:url value='/release' />">認証解除</a>&nbsp;
                         </c:if>
                         <c:if test="${sessionScope.authorization_client.companycode == null}">
@@ -45,7 +45,7 @@
                 ${param.content}
             </div>
             <div id="footer">
-                by Taro Kirameki.
+                by Chikara.Miyazawa
             </div>
 
         </div>

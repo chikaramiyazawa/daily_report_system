@@ -9,11 +9,9 @@
                 <c:out value="${flush}"></c:out>
             </div>
         </c:if>
-        <h2>"${sessionScope.authorization_client.companyname}"商談一覧</h2>
+        <h2>商談Id"${sessionScope.use.search_id}"　照合中</h2>
 
         <p><a href="<c:url value='/search/narrow' />">商談Idを検索する</a></p>
-
-        <p><a href="<c:url value='/search/idupdate'/>">商談を更新する</a></p>
 
         <table id="opportunity_list">
             <tbody>
@@ -32,7 +30,15 @@
                             <td class="opportunity_changer"><c:out value="${opportunity.changer}" /></td>
                             <td class="opportunity_date"><fmt:formatDate value='${opportunity.opportunity_date}' pattern='yyyy-MM-dd' /></td>
                             <td class="opportunity">${opportunity.opportunity}</td>
-                            <td class="report_action"><a href="<c:url value='/opportunity/show?id=${opportunity.id}' />">詳細を見る</a></td>
+                            <td class="report_action">
+                            <c:choose><c:when test= "${sessionScope.use.search_id == opportunity.faceid}">
+                            <a href="<c:url value='/opportunity/show?id=${opportunity.id}' />">詳細を見る</a>
+                            </c:when>
+                            <c:otherwise>
+                                    <c:out value="×" />
+                                </c:otherwise>
+                            </c:choose>
+                            </td>
                     </tr>
                     </c:forEach>
                     </tbody>
@@ -52,6 +58,6 @@
                                 </c:forEach>
                                      </div>
 
-                    <p><a href="<c:url value='/search/use' />">商談を追加する</a></p>
+                <p><a href="<c:url value='/remove/searchid' />">商談Idの照合を解除する</a></p>
                 </c:param>
             </c:import>

@@ -27,6 +27,11 @@
      <c:out value="${sessionScope.authorization_client.companyname}" />
      <br /><br />
 
+     <label for="search_id">商談Id</label><br />
+      <c:out value="${sessionScope.use.search_id}" />
+     <input type="hidden" name="search_id" value="${sessionScope.use.search_id}" />
+     <br /><br />
+
      <label for="person">担当者</label><br />
      <c:out value="${opportunity.person}" />
      <input type="hidden" name = "person" value="${opportunity.person}" />
