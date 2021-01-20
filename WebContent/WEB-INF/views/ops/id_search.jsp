@@ -7,7 +7,7 @@
 
    <c:if test="${hasError}">
     <div id="flush_error">
-    登録されていない商談Idか、使用済みの商談Idを使用しています。<br />
+   商談Idが未入力です。<br />
     </div>
         </c:if>
         <c:if test="${flush != null}">
@@ -17,14 +17,14 @@
             </div>
         </c:if>
 
- <h2>商談Id使用画面</h2>
- <form method="POST" action= "<c:url value='/search/use'/>">
- <label for="search_id">商談Id</label><br />
- <input type="text" name="search_id" value="${searcher.search_id}"/>
+ <h2>商談Id検索画面</h2>
+ <form method="POST" action= "<c:url value='/opportunity/op_id/search'/>">
+ <label for="op_id">商談Id</label><br />
+ <input type="text" name="op_id" value="${opportunity.op_id}"/>
  <br /><br />
 
  <input type="hidden" name="_token" value="${_token}" />
- <button type="submit">認証</button>
+ <button type="submit">検索</button>
  </form>
 
  <a href="<c:url value="/opportunity/index" />">商談一覧に戻る</a>

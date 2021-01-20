@@ -9,14 +9,13 @@
                 <c:out value="${flush}"></c:out>
             </div>
         </c:if>
-        <h2>"${sessionScope.authorization_client.companyname}" の商談一覧</h2>
+        <h2>会社Code 担当者 の検索結果</h2>
 
         <p><a href="<c:url value='/opportunity/op_code/person/search' />">会社Codeと担当者を検索する</a></p>
         <p><a href="<c:url value='/opportunity/op_id/search'/>">商談Idを検索する</a></p>
         <p><a href="<c:url value='/opportunity/op_date/search'/>">日付検索する</a></p>
 
-
-
+        <p>会社Code "${sessionScope.authorization_client.companycode}" 更新可</p>
         <table id="opportunity_list">
             <tbody>
                 <tr>
@@ -35,7 +34,7 @@
                             <td class="opportunity_person"><c:out value="${opportunity.person}" /></td>
                             <td class="opportunity_changer"><c:out value="${opportunity.changer}" /></td>
                             <td class="opportunity_date"><fmt:formatDate value='${opportunity.opportunity_date}' pattern='yyyy-MM-dd' /></td>
-                            <td class="opportunity">${opportunity.opportunity}</td>
+                            <td class="opportunity"><c:out value="${opportunity.opportunity}"/></td>
                             <td class="report_action"><a href="<c:url value='/opportunity/show?id=${opportunity.id}' />">詳細を見る</a></td>
                     </tr>
                     </c:forEach>

@@ -15,7 +15,6 @@ import javax.servlet.http.HttpServletResponse;
 import models.Client;
 import models.validators.ClientValidator;
 import utils.DBUtil;
-import utils.EncryptUtil;
 
 /**
  * Servlet implementation class ClientUpdateServlet
@@ -50,22 +49,12 @@ public class ClientUpdateServlet extends HttpServlet {
                 c.setCompanycode(request.getParameter("companycode"));
             }
 
-            Boolean password_check_flag = true;
 
-            String password = request.getParameter("password");
-            if(password == null || password.equals("")){
-                password_check_flag = false;
-            }else{
-                c.setPassword(
-                        EncryptUtil.getPasswordEncrypt(
-                        password,
-                        (String)this.getServletContext().getAttribute("pepper")));
-            }
             c.setCompanyname(request.getParameter("companyname"));
             c.setUpdated_at(new Timestamp(System.currentTimeMillis()));
             c.setDelete_flag(0);
 
-            List<String> errors = ClientValidator.validate(c, code_duplicate_check_flag, password_check_flag);
+            List<String> errors = ClientValidator.validate(c, code_duplicate_check_flag);
             if(errors.size() > 0){
                 em.close();
 

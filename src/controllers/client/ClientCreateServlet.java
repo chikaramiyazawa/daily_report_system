@@ -15,7 +15,6 @@ import javax.servlet.http.HttpServletResponse;
 import models.Client;
 import models.validators.ClientValidator;
 import utils.DBUtil;
-import utils.EncryptUtil;
 
 /**
  * Servlet implementation class ClientCreateServlet
@@ -45,18 +44,13 @@ public class ClientCreateServlet extends HttpServlet {
 
             c.setCompanycode(request.getParameter("companycode"));
             c.setCompanyname(request.getParameter("companyname"));
-            c.setPassword(
-                    EncryptUtil.getPasswordEncrypt(
-                            request.getParameter("password"),
-                            (String)this.getServletContext().getAttribute("pepper")
-                            )
-                    );
+
             Timestamp currentTime = new Timestamp(System.currentTimeMillis());
             c.setCreated_at(currentTime);
             c.setUpdated_at(currentTime);
             c.setDelete_flag(0);
 
-            List<String> errors = ClientValidator.validate(c, true, true);
+            List<String> errors = ClientValidator.validate(c, true );
             if(errors.size() > 0){
                 em.close();
 

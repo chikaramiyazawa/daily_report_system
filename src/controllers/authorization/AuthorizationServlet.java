@@ -13,7 +13,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import models.Client;
 import utils.DBUtil;
-import utils.EncryptUtil;
 
 /**
  * Servlet implementation class AuthorizationServlet
@@ -53,19 +52,18 @@ public class AuthorizationServlet extends HttpServlet {
 
         String companycode = request.getParameter("companycode");
         String companyname = request.getParameter("companyname");
-        String plain_pass = request.getParameter("password");
+
 
         Client c = null;
 
-        if(companycode != null && !companycode.equals("") && companyname != null && !companyname.equals("") && plain_pass != null && !plain_pass.equals("")){
+        if(companycode != null && !companycode.equals("") && companyname != null && !companyname.equals("")){
             EntityManager em = DBUtil.createEntityManager();
 
-            String password = EncryptUtil.getPasswordEncrypt(plain_pass,
-                                        (String)this.getServletContext().getAttribute("pepper"));
+
             try{
-                c = em.createNamedQuery("checkAuthentizationCodeAndPassword" , Client.class)
+                c = em.createNamedQuery("checkAuthentizationCode" , Client.class)
                                     .setParameter("companycode", companycode)
-                                    .setParameter("password", password)
+
                                     .getSingleResult();
             }catch(NoResultException ex){}
 

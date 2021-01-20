@@ -10,9 +10,10 @@
                 <c:out value="${flush}"></c:out>
             </div>
         </c:if>
-        <h2>日報　一覧</h2>
-         <p><a href="<c:url value='/reports/employee/search' />">氏名検索</a></p>
-          <p><a href="<c:url value='/reports/date/search'/>">日付検索</a>
+        <h2>氏名　検索結果</h2>
+
+        <p><a href="<c:url value='/reports/employee/search' />">氏名検索</a></p>
+         <p><a href="<c:url value='/reports/date/search'/>">日付検索</a>
         <table id="report_list">
             <tbody>
                 <tr>
@@ -23,7 +24,7 @@
                </tr>
                <c:forEach var="report" items="${reports}" varStatus="status">
                 <tr class="row${status.count % 2}">
-                    <td class="report_name"><c:out value="${report.name}"/></td>
+                    <td class="report_name"><c:out value="${report.employee.name}"/></td>
                     <td class="report_date"><fmt:formatDate value='${report.report_date}' pattern='yyyy-MM-dd' /></td>
                     <td class="report_title">${report.title}</td>
                     <td class="report_action"><a href="<c:url value='/reports/show?id=${report.id}'/>">詳細を見る</a></td>
@@ -49,4 +50,3 @@
 
                 </c:param>
             </c:import>
-

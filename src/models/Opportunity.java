@@ -29,29 +29,56 @@ import javax.persistence.Table;
             name = "getMyClientOpportunity",
             query = "SELECT o FROM Opportunity AS o WHERE o.client = :client ORDER BY o.id DESC"
             ),
-
-
     @NamedQuery(
             name = "getMyClientOpportunityCount",
             query = "SELECT COUNT(o) FROM Opportunity AS o WHERE o.client = :client "
             ),
-    @NamedQuery(
-            name = "getMySearch_idOpportunity",
-            query = "SELECT o FROM Opportunity AS o WHERE o.search_id = :search_id ORDER BY o.id DESC"
-            ),
-    @NamedQuery(
-            name = "getMySearch_idOpportunityCount",
-            query = "SELECT COUNT(o) FROM Opportunity AS o WHERE o.search_id = :search_id"
-            ),
-    @NamedQuery(
-            name = "checkRegisteredfaceid",
-            query ="SELECT COUNT(o)FROM Opportunity AS o WHERE o.faceid = :faceid"
-            ),
 
+    @NamedQuery(
+            name = "getOp_id",
+            query = "SELECT o FROM Opportunity AS o WHERE o.op_id = :op_id ORDER BY o.id DESC"
+            ),
+    @NamedQuery(
+            name = "getOp_idCount",
+            query = "SELECT COUNT(o) FROM Opportunity AS o WHERE o.op_id = :op_id"
+            ),
+    @NamedQuery(
+            name = "getPersonAndCode",
+            query = "SELECT o FROM Opportunity AS o WHERE o.person like :person AND o.op_code = :op_code ORDER BY o.id DESC"
+            ),
+    @NamedQuery(
+            name = "getPersonAndCodeCount",
+            query = "SELECT COUNT(o) FROM Opportunity AS  o WHERE o.person = :person AND o.op_code = :op_code"
+            ),
+    @NamedQuery(
+            name = "getOpportunity_date",
+            query = "SELECT o FROM Opportunity AS o WHERE o.opportunity_date = :opportunity_date ORDER BY o.id DESC"
+            ),
+    @NamedQuery(
+            name = "getOpportunity_dateCount",
+            query = "SELECT COUNT(o) FROM Opportunity AS o WHERE o.opportunity_date = :opportunity_date"
 
+            ),
+    @NamedQuery(
+            name = "getBeforeDate",
+            query = "SELECT o FROM Opportunity AS o WHERE o.opportunity_date < :opportunity_date  ORDER BY o.id DESC"
+            ),
+    @NamedQuery(
+            name = "getBeforeDateCount",
+            query = "SELECT COUNT(o) FROM Opportunity AS o WHERE o.opportunity_date < :opportunity_date"
+            ),
+    @NamedQuery(
+            name = "getAfterDate",
+            query = "SELECT o FROM Opportunity AS o WHERE o.opportunity_date > :opportunity_date  ORDER BY o.id DESC"
+            ),
+    @NamedQuery(
+            name = "getAfterDateCount",
+            query = "SELECT COUNT(o) FROM Opportunity AS o WHERE o.opportunity_date > :opportunity_date "
+               )
 })
 @Entity
 public class Opportunity {
+
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -65,12 +92,15 @@ public class Opportunity {
     @JoinColumn(name = "companycode", nullable = false)
     private Client companycode;
 
-    @ManyToOne
-    @JoinColumn(name = "search_id", nullable = false )
-    private Searcher search_id;
+    @Column(name = "op_code" , nullable = false)
+    private String op_code;
 
-    @Column(name = "faceid" , nullable = false)
-    private String faceid;
+    @Column(name = "op_id" , nullable = false)
+    private String op_id;
+
+    @Column(name = "op_com" , nullable = false)
+    private String op_com;
+
 
     @Column(name = "person" , nullable = false)
     private String person;
@@ -175,24 +205,34 @@ public class Opportunity {
         return changer;
     }
 
+
     public void setChanger(String changer) {
         this.changer = changer;
     }
 
-    public Searcher getSearch_id() {
-        return search_id;
+    public String getOp_id() {
+        return op_id;
     }
 
-    public void setSearch_id(Searcher search_id) {
-        this.search_id = search_id;
-    }
-    public String getFaceid() {
-        return faceid;
+    public void setOp_id(String op_id) {
+        this.op_id = op_id;
     }
 
-    public void setFaceid(String faceid) {
-        this.faceid = faceid;
+    public String getOp_code() {
+        return op_code;
     }
+
+    public void setOp_code(String op_code) {
+        this.op_code = op_code;
+    }
+    public String getOp_com() {
+        return op_com;
+    }
+
+    public void setOp_com(String op_com) {
+        this.op_com = op_com;
+    }
+
 
 
 }

@@ -11,7 +11,7 @@ import utils.DBUtil;
 public class ClientValidator {
 
 
-    public static List<String>validate(Client c ,Boolean code_duplicate_check_flag , Boolean password_check_flag){
+    public static List<String>validate(Client c ,Boolean code_duplicate_check_flag ){
         List<String>errors = new ArrayList<String>();
 
         String code_error = _validateCode(c.getCompanycode(), code_duplicate_check_flag);
@@ -23,10 +23,7 @@ public class ClientValidator {
         if(!name_error.equals("")){
             errors.add(name_error);
          }
-        String password_error = _validatePassword(c.getPassword(),  password_check_flag);
-        if(!password_error.equals("")){
-        errors.add(password_error);
-    }
+
     return errors;
 
 }
@@ -54,12 +51,7 @@ private static String _validateName(String companyname){
     return "";
 }
 
-private static String _validatePassword(String password, Boolean password_check_flag){
-    if(password_check_flag && (password == null || password.equals(""))){
-        return "パスワードを入力してください。";
-    }
-    return "";
-}
+
 }
 
 

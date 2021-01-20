@@ -13,21 +13,22 @@
      </div>
 </c:if>
      <label for="opportunity_date">日付</label><br />
-     <input type="opportunity_date" name="opportunity_date" value="<fmt:formatDate value='${opportunity.opportunity_date}' pattern='yyyy-MM-dd' />"/>
+     <input type="date" name="opportunity_date" value="<fmt:formatDate value='${opportunity.opportunity_date}' pattern='yyyy-MM-dd' />"/>
      <br /><br />
 
      <label for="companycode">会社Code</label><br />
      <c:out value="${sessionScope.authorization_client.companycode}" />
+     <input type="hidden" name ="op_code" value = "${sessionScope.authorization_client.companycode}"/>
      <br /><br />
 
 
      <label for="client">会社名</label><br />
      <c:out value="${sessionScope.authorization_client.companyname}" />
+     <input type ="hidden" name ="op_com" value="${sessionScope.authorization_client.companyname}"/>
      <br /><br />
 
-     <label for="search_id">商談Id</label><br />
-     <input type="hidden" name="search_id" value="${sessionScope.use.search_id}" />
-     <c:out value="${sessionScope.use.search_id}" />
+     <label for="op_id">商談Id</label><br />
+     <input type="text" name="op_id" value="${opportunity.op_id}" />
      <br /><br />
 
      <label for="person">担当者</label><br />

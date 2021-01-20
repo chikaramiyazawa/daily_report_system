@@ -15,7 +15,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import models.Client;
 import models.Opportunity;
-import models.Searcher;
 import models.validators.OpportunityValidator;
 import utils.DBUtil;
 
@@ -48,15 +47,15 @@ public class OpportunityCreateServlet extends HttpServlet {
             o.setCompanycode((Client)request.getSession().getAttribute("authorization_companycode"));
             o.setClient((Client)request.getSession().getAttribute("authorization_client"));
 
-            o.setSearch_id((Searcher)request.getSession().getAttribute("use"));
-
             Date opportunity_date = new Date(System.currentTimeMillis());
             String rd_str = request.getParameter("opportunity_date");
             if(rd_str != null && !rd_str.equals("")){
                 opportunity_date = Date.valueOf(request.getParameter("opportunity_date"));
             }
             o.setOpportunity_date(opportunity_date);
-            o.setFaceid(request.getParameter("search_id"));
+            o.setOp_id(request.getParameter("op_id"));
+            o.setOp_code(request.getParameter("op_code"));
+            o.setOp_com(request.getParameter("op_com"));
 
 
             o.setPerson(request.getParameter("person"));

@@ -33,6 +33,43 @@ import javax.persistence.Table;
             name = "getMyReportsCount",
             query = "SELECT COUNT(r) FROM Report AS r WHERE r.employee = :employee"
             ),
+    @NamedQuery(
+            name = "getNameSearch",
+            query = "SELECT r FROM Report AS r WHERE r.name like :name ORDER BY r.id DESC"
+            ),
+    @NamedQuery(
+            name = "getNameSearchCount" ,
+            query = "SELECT COUNT(r) FROM Report AS r WHERE r.name = :name"
+            ),
+    @NamedQuery(
+            name = "getReport_dateSearch",
+            query = "SELECT r FROM Report AS r WHERE r.report_date = :report_date ORDER BY r.id DESC"
+            ),
+    @NamedQuery(
+            name = "getReport_dateSearchCount",
+            query = "SELECT COUNT(r) FROM Report AS r WHERE r.report_date = :report_date"
+            ),
+    @NamedQuery(
+            name = "getBeforeReport",
+            query = "SELECT r FROM Report AS r WHERE r.report_date < :report_date ORDER BY r.id DESC"
+            ),
+    @NamedQuery(
+            name = "getBeforeReportCount",
+            query = "SELECT COUNT(r) FROM Report AS r WHERE r.report_date < :report_date"
+            ),
+    @NamedQuery(
+            name = "getAfterReport",
+            query = "SELECT r FROM Report AS r WHERE r.report_date > :report_date ORDER BY r.id DESC"
+            ),
+    @NamedQuery(
+            name = "getAfterReportCount",
+            query = "SELECT COUNT(r) FROM Report AS r WHERE r.report_date > :report_date"
+
+            )
+
+
+
+
 })
 @Entity
 public class Report {
@@ -47,6 +84,9 @@ public class Report {
 
     @Column(name = "report_date", nullable = false)
     private Date report_date;
+
+    @Column(name = "name" , nullable = false)
+    private String name;
 
     @Column(name = "title", length = 255, nullable = false)
     private String title;
@@ -115,5 +155,12 @@ public class Report {
 
     public void setUpdated_at(Timestamp updated_at) {
         this.updated_at = updated_at;
+    }
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }

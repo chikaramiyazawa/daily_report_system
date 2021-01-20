@@ -19,9 +19,6 @@
  <input type="text" name="companyname" value="${client.companyname}" />
  <br /><br />
 
- <label for="password">パスワード</label><br />
- <input type="password" name="password" />
- <br /><br />
 
  <input type="hidden" name="_token" value="${_token}" />
  <button type="submit">投稿</button>

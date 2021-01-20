@@ -8,13 +8,13 @@
         <c:choose>
             <c:when test="${opportunity != null}">
 
-                <h2><c:out value="${sessionScope.authorization_client.companyname}"/>の商談　詳細ページ  </h2>
+
 
                 <table>
                     <tbody>
                         <tr>
                         <th>会社Code</th>
-                        <td><c:out value="${sessionScope.authorization_client.companycode}" /></td>
+                        <td><c:out value="${opportunity.op_code}" /></td>
                         </tr>
                         <tr>
                         <tr>
@@ -23,7 +23,11 @@
                         </tr>
                         <tr>
                             <th>商談Id</th>
-                            <td><c:out value="${opportunity.faceid}" /></td>
+                            <td><c:out value="${opportunity.op_id}" /></td>
+                        </tr>
+                        <tr>
+                            <th>会社名</th>
+                            <td><c:out value="${opportunity.op_com}" /></td>
                         </tr>
                         <tr>
                             <th>担当者</th>
@@ -71,7 +75,7 @@
                              </tbody>
                              </table>
 
-                                <c:if test= "${sessionScope.use.search_id == opportunity.faceid}">
+                                <c:if test= "${sessionScope.authorization_client.companycode == opportunity.op_code}">
                                 <p><a href="<c:url value="/opportunity/edit?id=${opportunity.id}" />">この商談を更新する</a></p>
                                 </c:if>
 

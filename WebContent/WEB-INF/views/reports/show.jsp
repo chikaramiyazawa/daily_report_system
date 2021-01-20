@@ -13,7 +13,7 @@
                     <tbody>
                         <tr>
                         <th>氏名</th>
-                        <td><c:out value="${report.employee.name}" /></td>
+                        <td><c:out value="${report.name}" /></td>
                         </tr>
                         <tr>
                             <th>日付</th>

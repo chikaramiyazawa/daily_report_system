@@ -9,10 +9,10 @@ import models.Opportunity;
 import utils.DBUtil;
 
 public class OpportunityValidator {
-    public static List<String> validate(Opportunity o ,Boolean faceid_duplicate_check_flag){
+    public static List<String> validate(Opportunity o ,Boolean Op_id_duplicate_check_flag){
         List<String>errors = new ArrayList<String>();
 
-        String faceid_error = _validateFaceid(o.getFaceid(), faceid_duplicate_check_flag);
+        String faceid_error = _validateOp_id(o.getOp_id(), Op_id_duplicate_check_flag);
         if(!faceid_error.equals("")){
             errors.add(faceid_error);
         }
@@ -37,17 +37,17 @@ public class OpportunityValidator {
         return errors;
     }
 
-    private static String _validateFaceid(String faceid , Boolean faceid_duplicate_check_flag){
-        if(faceid == null || faceid.equals("")){
+    private static String _validateOp_id(String op_id , Boolean faceid_duplicate_check_flag){
+        if(op_id == null || op_id.equals("")){
             return "商談Idを入力してください。";
         }
         if(faceid_duplicate_check_flag){
             EntityManager em = DBUtil.createEntityManager();
-            long faceid_count = (long)em.createNamedQuery("checkRegisteredfaceid" , Long.class)
-                                        .setParameter("faceid", faceid)
+            long opid_count = (long)em.createNamedQuery("getOp_idCount" , Long.class)
+                                        .setParameter("op_id", op_id)
                                         .getSingleResult();
             em.close();
-            if(faceid_count > 0){
+            if(opid_count > 0){
                 return "入力された商談Idはすでに存在しています";
             }
         }

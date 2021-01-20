@@ -18,6 +18,7 @@
 
      <label for="name">氏名</label><br />
      <c:out value="${sessionScope.login_employee.name}" />
+     <input type="hidden" name="name" value="${sessionScope.login_employee.name}" />
      <br /><br />
 
      <label for="title">タイトル</label>

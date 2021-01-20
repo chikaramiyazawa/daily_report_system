@@ -9,14 +9,18 @@
                 <c:out value="${flush}"></c:out>
             </div>
         </c:if>
-       <h2>商談Id"${sessionScope.use.search_id}"　照合中</h2>
+        <h2>商談Id 検索結果</h2>
 
-        <p><a href="<c:url value='/search/narrow' />">商談Idを検索する</a></p>
+        <p><a href="<c:url value='/opportunity/op_code/person/search' />">会社Codeと担当者を検索する</a></p>
+        <p><a href="<c:url value='/opportunity/op_id/search'/>">商談Idを検索する</a></p>
+        <p><a href="<c:url value='/opportunity/op_date/search'/>">日付検索する</a></p>
 
+        <p>会社Code "${sessionScope.authorization_client.companycode}" 更新可</p>
         <table id="opportunity_list">
             <tbody>
                 <tr>
-                    <th class="opportunity_faceid">商談Id</th>
+                    <th class="opportunity_op_id">商談Id</th>
+                    <th class="opportunity_op_code">会社Code</th>
                     <th class="opportunity_person">担当者</th>
                     <th class="opportunity_changer">更新者</th>
                     <th class="opportunity_date">日付</th>
@@ -25,12 +29,13 @@
                 </tr>
                     <c:forEach var="opportunity" items="${opportunity}" varStatus="status">
                         <tr class="row${status.count %2}">
-                            <td class="opportunity_faceid"><c:out value="${opportunity.faceid}"/></td>
+                            <td class="opportunity_op_id"><c:out value="${opportunity.op_id}"/></td>
+                            <td class="opportunity_op_code"><c:out value="${opportunity.op_code}"/></td>
                             <td class="opportunity_person"><c:out value="${opportunity.person}" /></td>
                             <td class="opportunity_changer"><c:out value="${opportunity.changer}" /></td>
                             <td class="opportunity_date"><fmt:formatDate value='${opportunity.opportunity_date}' pattern='yyyy-MM-dd' /></td>
-                            <td class="opportunity">${opportunity.opportunity}</td>
-                            <td class="report_action"><a href="<c:url value='/opportunity/show?id=${opportunity.id}' />">詳細を見る</a></td>
+                            <td class="opportunity"><c:out value = "${opportunity.opportunity}"/></td>
+                            <td class="opportunity_action"><a href="<c:url value='/opportunity/show?id=${opportunity.id}' />">詳細を見る</a></td>
                     </tr>
                     </c:forEach>
                     </tbody>
@@ -50,6 +55,6 @@
                                 </c:forEach>
                                      </div>
 
-                <p><a href="<c:url value='/remove/searchid' />">商談Idの照合を解除する</a></p>
+
                 </c:param>
             </c:import>

@@ -26,8 +26,8 @@ import javax.persistence.Table;
             query ="SELECT COUNT(c)FROM Client AS c WHERE c.companycode = :companycode"
             ),
     @NamedQuery(
-            name = "checkAuthentizationCodeAndPassword",
-            query = "SELECT c FROM Client AS c WHERE c.delete_flag = 0 AND c.companycode = :companycode AND c.password = :password"
+            name = "checkAuthentizationCode",
+            query = "SELECT c FROM Client AS c WHERE c.delete_flag = 0 AND c.companycode = :companycode "
             )
 })
 @Entity
@@ -43,10 +43,6 @@ public class Client {
 
     @Column(name = "companyname", nullable = false, unique = true)
     private String companyname;
-
-    @Column(name = "password", length = 64, nullable = false)
-    private String password;
-
 
     @Column(name = "created_at" , nullable = false)
     private Timestamp created_at;
@@ -80,14 +76,6 @@ public class Client {
 
     public void setCompanyname(String companyname) {
         this.companyname = companyname;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 
     public Timestamp getCreated_at() {

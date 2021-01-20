@@ -25,12 +25,10 @@
             <input type="text" name="companyname" value="${companyname}"/>
             <br /><br />
 
-            <label for="password">パスワード</label><br />
-            <input type="password" name="password" />
-            <br /><br />
-
             <input type="hidden" name="_token" value="${_token}" />
             <button type="submit">認証</button>
         </form>
+
+         <a href="<c:url value='/client/list' />">取引先一覧</a>
     </c:param>
   </c:import>
