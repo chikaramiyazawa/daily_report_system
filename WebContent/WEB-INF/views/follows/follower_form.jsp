@@ -13,7 +13,7 @@
      </div>
 </c:if>
                             <label for="report_date">日付</label><br />
-                            <input type="date" name="report_date" value="<fmt:formatDate value='${report.report_date}' pattern='yyyy-MM-dd' />"/>
+                            <input type="date" name="report_date" value="<fmt:formatDate value='${follow.report_date}' pattern='yyyy-MM-dd' />"/>
                             <br /><br />
 
                              <label for="followerdname">"${follow.followerdname}"</label><br />
@@ -24,8 +24,8 @@
                              <input type="hidden" name="name" value="${sessionScope.login_employee.name}" />
                              <br /><br />
 
-                             <label for="title">タイトル "${report.title}"</label>
-                             <input type="hidden" name="title" value="${report.title}" />
+                             <label for="title">タイトル "${follow.title}"</label>
+                             <input type="hidden" name="title" value="${follow.title}" />
                              <br /><br />
 
                              <label for="content">内容  "${follow.content}"</label><br />
